@@ -172,6 +172,18 @@ HERO_CSS = """
 }
 
 /* ── DETECTION PAGE ─────────────────────────── */
+
+/* Fix: paksa stMarkdownContainer tidak override text-align */
+[data-testid="stMarkdownContainer"] h1,
+[data-testid="stMarkdownContainer"] p,
+[data-testid="stMarkdownContainer"] span {
+    text-align: inherit;
+}
+
+/* Header wrapper center */
+[data-testid="stMarkdownContainer"] > div[style*="text-align: center"] {
+    width: 100% !important;
+}
 .det-page {
     background: #f8f9fc;
     min-height: 100vh;
@@ -339,17 +351,22 @@ HERO_CSS = """
     background: #f1f3f8 !important;
     border-radius: 10px !important;
     padding: 4px !important;
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 1.25rem !important;
     border: none !important;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
 }
 
 .stTabs [data-baseweb="tab"] {
     border-radius: 7px !important;
-    font-size: 0.82rem !important;
+    font-size: 0.78rem !important;
     font-weight: 500 !important;
     color: #64748b !important;
-    padding: 0.45rem 1.1rem !important;
+    padding: 0.4rem 0.8rem !important;
     border: none !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
 }
 
 .stTabs [aria-selected="true"] {
@@ -376,37 +393,41 @@ HERO_CSS = """
     box-shadow: 0 0 0 3px rgba(99,102,241,0.1) !important;
 }
 
-/* Primary/Detect button */
+/* Primary/Detect button — semua tombol aksi */
 div[data-testid="stVerticalBlock"] .stButton > button {
     background: #0f172a !important;
     color: #ffffff !important;
     border: none !important;
     border-radius: 10px !important;
-    font-size: 0.86rem !important;
+    font-size: 0.88rem !important;
     font-weight: 600 !important;
-    padding: 0.7rem 1.5rem !important;
+    padding: 0.65rem 1.5rem !important;
     width: 100% !important;
+    letter-spacing: 0.01em !important;
 }
 
 div[data-testid="stVerticalBlock"] .stButton > button:hover {
     background: #1e293b !important;
 }
 
-/* Back button */
-.back-btn .stButton > button {
-    background: transparent !important;
+/* Back button — via class .back-wrap di detection.py */
+.back-wrap .stButton > button {
+    background: #ffffff !important;
     color: #64748b !important;
     border: 1px solid #e2e6f0 !important;
     border-radius: 8px !important;
-    font-size: 0.8rem !important;
+    font-size: 0.82rem !important;
     font-weight: 500 !important;
-    padding: 0.4rem 1rem !important;
+    padding: 0.45rem 1.25rem !important;
     width: auto !important;
+    min-width: 160px !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
 }
 
-.back-btn .stButton > button:hover {
+.back-wrap .stButton > button:hover {
     background: #f8f9fc !important;
     color: #0f172a !important;
+    border-color: #cbd5e1 !important;
 }
 
 /* File uploader */
@@ -463,10 +484,20 @@ div[data-testid="stVerticalBlock"] .stButton > button:hover {
 
 /* Responsive */
 @media (max-width: 640px) {
+    .block-container {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+    }
     .hero-title { font-size: 2.2rem; }
-    .prob-row { flex-direction: column; }
-    .stat-row { flex-direction: column; }
+    .prob-row {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+    }
+    .prob-pill { min-width: calc(33% - 0.4rem); }
+    .stat-row { flex-direction: row !important; }
+    .stat-card { min-width: calc(33% - 0.4rem); }
     .hero-stats-row { max-width: 100%; }
+    .topword-label { width: 70px; font-size: 0.72rem; }
 }
 
 /* ── Highlight box (fitur 1) ────────────────── */
